@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "749016788161",
+    "project_id": "rnlearningproject",
+    "storage_bucket": "rnlearningproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749016788161:android:828afd8324a2d70970f840",
+        "android_client_info": {
+          "package_name": "com.rnlearningproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749016788161-bk4icmadiun0snvksnlr922l1t8poe6u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rnlearningproject",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "749016788161-nskh4djrviv6ein0qe62jmp8rss50gvt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgf74nBfrYuXShWweXzWn3nN2J_CxUmJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749016788161-nskh4djrviv6ein0qe62jmp8rss50gvt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
