@@ -3,7 +3,7 @@ import {
   Button,
   PermissionsAndroid,
   StyleSheet,
-  Text,
+  Text,Platform,
   TextInput,
   View,
 } from 'react-native';
@@ -15,49 +15,67 @@ const BleConnection: React.FC = () => {
   const [macID, setMacID] = useState('');
 
   const requestCameraPermission = async () => {
-    try {
-      const grantedLocation = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: 'fine location Permission',
-          message:
-            'fine location App needs access to your fine location ' +
-            'so you can connect to bot.',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
+    // try {
+    //   const grantedLocation = await PermissionsAndroid.request(
+    //     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+    //     {
+    //       title: 'fine location Permission',
+    //       message:
+    //         'fine location App needs access to your fine location ' +
+    //         'so you can connect to bot.',
+    //       buttonNeutral: 'Ask Me Later',
+    //       buttonNegative: 'Cancel',
+    //       buttonPositive: 'OK',
+    //     },
+    //   );
 
-      if (grantedLocation !== PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('location permission  ot granted');
-        return;
-      }
+    //   if (grantedLocation !== PermissionsAndroid.RESULTS.GRANTED) {
+    //     console.log('location permission  ot granted');
+    //     return;
+    //   }
 
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
-        {
-          title: 'Bluetooth Permission',
-          message:
-            'Bluetooth App needs access to your bluetooth ' +
-            'so you can connect to bot.',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
+    //   const granted = await PermissionsAndroid.request(
+    //     PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
+    //     {
+    //       title: 'Bluetooth Permission',
+    //       message:
+    //         'Bluetooth App needs access to your bluetooth ' +
+    //         'so you can connect to bot.',
+    //       buttonNeutral: 'Ask Me Later',
+    //       buttonNegative: 'Cancel',
+    //       buttonPositive: 'OK',
+    //     },
+    //   );
 
-      console.log({granted});
+    //   console.log({granted});
 
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('You can use the bluetooth');
-        handleConnect();
-      } else {
-        console.log('bluetooth permission denied');
-      }
-    } catch (err) {
-      console.warn(err);
-    }
+    //   if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+    //     console.log('You can use the bluetooth');
+    //     handleConnect();
+    //   } else {
+    //     console.log('bluetooth permission denied');
+    //   }
+    // } catch (err) {
+    //   console.warn(err);
+    // }
+
+    if (Platform.OS === 'android' && Platform.Version >= 23) {
+      PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION).then((result) => {
+          if (result) {
+            console.log("Permission is OK");
+            handleConnect();
+          } else {
+            PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION).then((result) => {
+              if (result) {
+                console.log("User accept");
+                handleConnect();
+              } else {
+                console.log("User refuse");
+              }
+            });
+          }
+      });
+    } 
   };
 
   const handleConnect = () => {
