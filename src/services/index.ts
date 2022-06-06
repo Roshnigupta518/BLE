@@ -71,6 +71,11 @@ export const handlePushNotification = (
   notification: FirebaseMessagingTypes.RemoteMessage,
 ) => {
   if (notification && notification.data && notification.data.url) {
+     
+    // if(notification.data.url=='profile'){
+    //   Navigation.navigate('profile')
+    // }
+
     const item = {
       url: notification.data.url,
     };

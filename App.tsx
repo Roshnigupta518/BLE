@@ -21,6 +21,8 @@ import Settings from './src/screens/Settings';
 import Profile from './src/screens/Profile';
 import {Linking, Text} from 'react-native';
 import BleConnection from './src/screens/BleConnection';
+import { navigationRef,
+  navigate} from './src/screens/Navigation_service';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,7 +31,7 @@ const App: React.FC = () => {
     screens: {
       Home: 'home',
       Settings: 'settings',
-      Profile: 'profile',
+      profile: 'profile',
     },
   };
 
@@ -53,6 +55,7 @@ const App: React.FC = () => {
 
       if (message) {
         notifData = handlePushNotification(message);
+        
       }
 
       console.log({
@@ -103,12 +106,16 @@ const App: React.FC = () => {
   };
 
   return (
-    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
+    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}
+  //   ref = {
+  //     navigationRef
+  // }
+  >
       <Stack.Navigator>
         <Stack.Screen name="BleConnection" component={BleConnection} />
         <Stack.Screen name="Home" component={Main} />
         <Stack.Screen name="Settings" component={Settings} />
-        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
   );
